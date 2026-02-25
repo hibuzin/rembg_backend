@@ -43,7 +43,7 @@ router.post('/', upload.single('image'), (req, res) => {
 
       res.json({
         message: 'Background removed successfully',
-        output: result.secure_url  // Cloudinary URL
+        output: result.secure_url  
       });
 
     } catch (uploadError) {
