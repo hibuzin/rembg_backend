@@ -27,7 +27,7 @@ router.post('/', upload.single('image'), (req, res) => {
   const inputPath = req.file.path;
   const outputPath = `outputs/output-${Date.now()}.png`;
 
- const command = `python3 python/remove_bg.py ${inputPath} ${outputPath}`;
+  const command = `python python/remove_bg.py ${inputPath} ${outputPath}`;
 
   exec(command, async (error, stdout, stderr) => {
     if (error) {
@@ -43,7 +43,8 @@ router.post('/', upload.single('image'), (req, res) => {
 
       res.json({
         message: 'Background removed successfully',
-        output: result.secure_url  
+        output: result.secure_url  // Cloudinary URL
+
       });
 
     } catch (uploadError) {
