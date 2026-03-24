@@ -27,8 +27,10 @@ router.post('/', upload.single('image'), (req, res) => {
   const inputPath = req.file.path;
   const outputPath = `outputs/output-${Date.now()}.png`;
 
-  const command = `python python/remove_bg.py ${inputPath} ${outputPath}`;
-
+  const command =
+    process.platform === "win32"
+      ? `python python/remove_bg.py ${inputPath} ${outputPath}`
+      : `python3 python/remove_bg.py ${inputPath} ${outputPath}`;
   exec(command, async (error, stdout, stderr) => {
     if (error) {
       console.error(error);

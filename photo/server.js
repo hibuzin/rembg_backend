@@ -5,12 +5,22 @@ const cors = require('cors');
 const path = require('path');
 
 
+const connectDB = require("./config/db");
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 app.use('/uploads', express.static('uploads'));
 app.use('/outputs', express.static('outputs'));
+
+
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/payment", require("./routes/payment"));
+app.use("/api/webhook",require("./routes/webhook"))
+
+require("./cron/expiryJob");
 
 const removeBgRoute = require('./routes/removeBg');
 app.use('/api/remove-bg', removeBgRoute);
@@ -24,6 +34,7 @@ mongoose.connect(MONGO_URI)
 app.get('/', (req, res) => {
   res.send('API running');
 });
+
 
 
 const PORT = process.env.PORT || 5000;
