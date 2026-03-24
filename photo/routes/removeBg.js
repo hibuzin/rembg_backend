@@ -5,7 +5,7 @@ const { exec } = require('child_process');
 const cloudinary = require('cloudinary').v2;
 const router = express.Router();
 
-// Cloudinary config
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -37,7 +37,7 @@ router.post('/', upload.single('image'), (req, res) => {
       return res.status(500).json({ error: 'Background removal failed' });
     }
 
-    // Upload to Cloudinary
+    
     try {
       const result = await cloudinary.uploader.upload(outputPath, {
         folder: 'rembg-outputs'
