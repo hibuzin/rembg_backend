@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require("./config/db");
-const fs = require('fs'); 
+const fs = require('fs');
 
 
 if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
