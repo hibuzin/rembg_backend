@@ -3,9 +3,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-
-
 const connectDB = require("./config/db");
+const fs = require('fs'); 
+
+
+if (!fs.existsSync('uploads')) fs.mkdirSync('uploads');
+if (!fs.existsSync('outputs')) fs.mkdirSync('outputs');
 
 const app = express();
 
